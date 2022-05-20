@@ -5,6 +5,7 @@ Tools for using STOMP with Apache ActiveMQ without additional dependencies
 ```
 find $(pwd) | grep mp4 | bin/stomp_sender_bulk videos_to_process
 NEXT_VIDEO = $(bin/stomp_receiver videos_to_process)
+NEXT_VIDEO = $(ssh -q server_with_internet_connection "~/stomp_tools/bin/stomp_receiver" videos_to_process)
 bin/stomp_dump_queue videos_to_process > list_of_videos_in_queue.txt
 ```
 Settings (including credentials) are specified in `stomp_config.cfg`, which needs to be in the same directory as the tools. A sample is provided in the src directory.
