@@ -23,10 +23,10 @@ my $stomp = Net::Stomp->new( {
 	hostname => $config_hash->{hostname}, 
 	port => $config_hash->{port} } );
 if ($config_hash->{username}) {
-	$stomp->connect( { login => $config_hash->{username} , passcode => $config_hash->{password} } );
+	$stomp->connect( { login => $config_hash->{username} , passcode => $config_hash->{password} } ) or die "connection failed; credentials wrong?";
 }
 else {
-	$stomp->connect();
+	$stomp->connect() or die "connection failed; credentials necessary?";
 }
 $stomp->subscribe(
 	{   destination             => $queue,
