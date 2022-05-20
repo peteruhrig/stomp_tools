@@ -2,8 +2,14 @@
 
 use Net::Stomp;
 use Config::File;
+use File::Spec::Functions qw(rel2abs);
+use File::Basename qw(dirname);
 
-my $config_hash = Config::File::read_config_file("stomp_config.cfg");
+my $path = rel2abs( $0 );
+our $directory = dirname( $path );
+
+
+my $config_hash = Config::File::read_config_file($directory."/stomp_config.cfg");
 
 my $queue;
 if ($ARGV[0] ne "") {
