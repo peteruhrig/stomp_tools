@@ -8,7 +8,17 @@ NEXT_VIDEO = $(bin/stomp_receiver videos_to_process)
 NEXT_VIDEO = $(ssh -q server_with_internet_connection "~/stomp_tools/bin/stomp_receiver" videos_to_process)
 bin/stomp_dump_queue videos_to_process > list_of_videos_in_queue.txt
 ```
-Settings (including credentials) are specified in `stomp_config.cfg`, which needs to be in the same directory as the tools. A sample is provided in the src directory. The binaries were compiled on Ubuntu 16.04 LTS, because that was the oldest system available. They should work on anything newer than that.
+Settings (including credentials) are specified in `stomp_config.cfg`, which needs to be in the same directory as the tools. A sample is provided in the src directory. 
+
+## Compiling
+The binaries were compiled on Ubuntu 16.04 LTS, because it has the oldest glibc. If compiled on 20.04 it will not run on 18.04, for instance. They should work on anything newer than that. The following packages were installed.
+```
+sudo apt install libnet-stomp-perl
+sudo apt install libio-socket-inet6-perl
+sudo apt install libpar-packer-perl
+sudo apt install libconfig-file-perl
+```
+The compilation is done with pp by `makeit.sh`.
 
 ## Server Side
 The config file in the `server_conf` directory is a closed-down version of the original `activemq.xml` shipped with ActiveMQ.
