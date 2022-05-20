@@ -26,7 +26,13 @@ else {
 
 while (<STDIN>) {
 	chomp;
-$stomp->send(
-	{ destination => $queue, body => $_ } );
+	if ($config_hash->{send_with_receipt}) {
+		$stomp->send_with_receipt(
+			{ destination => $queue, body => $_ } ) or die "Could not send.\n";
+	}
+	else {
+		$stomp->send(
+			{ destination => $queue, body => $_ } );
+	}
 }
 $stomp->disconnect;
